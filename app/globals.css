@@ -85,14 +85,10 @@ a {
 
 .h1 {
   font-size: clamp(2.15rem, 8vw, 5.2rem);
-  overflow-wrap: anywhere;
-  word-break: break-word;
 }
 
 .h2 {
   font-size: clamp(1.7rem, 5.2vw, 3.35rem);
-  overflow-wrap: anywhere;
-  word-break: break-word;
 }
 
 .h3 {
@@ -246,7 +242,7 @@ a {
   object-fit: cover;
   object-position: center 18%;
   filter: saturate(0.85) contrast(1.08);
-  animation: hero- ken 18s ease-out both;
+  animation: hero-ken 18s ease-out both;
 }
 
 .hero-cinematic-shade {
@@ -732,7 +728,9 @@ a {
   }
 
   .hero-cinematic-img {
-    object-position: center 12%;
+    /* Composite = antes|depois lado a lado; no retrato a janela vê ~38% da
+       largura. 88% centraliza a janela na foto "depois" (metade direita). */
+    object-position: 88% 15%;
   }
 
   .hero-cinematic-shade {

@@ -34,7 +34,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://baseperformance.com.br"),
+  metadataBase: new URL("https://landing-sepia-phi-67.vercel.app"),
   title: "Protocolo Base Futebol | Base Performance",
   description:
     "Em 6 semanas, reconstrua a base atlética do futebol com o protocolo usado na recuperação do Berô Paraíba. Método EF Performance.",
@@ -52,8 +52,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={`${anton.variable} ${montserrat.variable} ${sora.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${anton.variable} ${montserrat.variable} ${sora.variable}`}
+    >
+      <body>
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s)
