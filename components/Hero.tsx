@@ -21,7 +21,7 @@ export function Hero() {
       <div className="hero-static-shade" aria-hidden="true" />
       <div className="hero-static-inner">
         <p className="eyebrow">
-          <span className="min">0&apos;</span> — Berô Paraíba · Hexacampeão do X1
+          <span className="min">0&apos;</span> · Berô Paraíba · Hexacampeão do X1
           Brazil
         </p>
         <h1 className="display display-xl">
@@ -35,8 +35,8 @@ export function Hero() {
         <div className="hero-actions">
           <CtaButton
             ctaId="hero"
-            label="Começar minha base — R$ 59,90"
-            labelShort="Começar — R$ 59,90"
+            label="Começar minha base · R$ 59,90"
+            labelShort="Começar · R$ 59,90"
           />
           <a className="text-link" href="#prova">
             Ver a transformação do Berô ↓

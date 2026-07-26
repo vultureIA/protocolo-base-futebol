@@ -224,7 +224,7 @@ export function OrbitHero() {
         {/* Overlays de texto — 4 beats */}
         <div className="orbit-content">
           <p className="eyebrow orbit-eyebrow">
-            <span className="min">0&apos;</span> — Berô Paraíba · Hexacampeão do
+            <span className="min">0&apos;</span> · Berô Paraíba · Hexacampeão do
             X1 Brazil
           </p>
 
@@ -269,8 +269,8 @@ export function OrbitHero() {
             <div className="hero-actions">
               <CtaButton
                 ctaId="hero"
-                label="Começar minha base — R$ 59,90"
-                labelShort="Começar — R$ 59,90"
+                label="Começar minha base · R$ 59,90"
+                labelShort="Começar · R$ 59,90"
               />
               <a className="text-link" href="#prova">
                 Ver a transformação do Berô ↓

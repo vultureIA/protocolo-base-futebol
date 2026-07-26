@@ -6,7 +6,7 @@ export function Mechanism() {
       <div className="wrap">
         <div data-reveal>
           <p className="eyebrow">
-            <span className="min">45&apos;</span> — Intervalo · O protocolo
+            <span className="min">45&apos;</span> · Intervalo · O protocolo
           </p>
           <h2 className="display display-lg">
             Seis semanas.
@@ -17,7 +17,7 @@ export function Mechanism() {
           </h2>
           <p className="lead">
             Primeiro o corpo aprende a se segurar. Depois aprende a explodir.
-            Nessa ordem — porque potência sem base é lesão marcando hora.
+            Nessa ordem, porque potência sem base é lesão marcando hora.
           </p>
         </div>
 
@@ -33,9 +33,9 @@ export function Mechanism() {
             ))}
           </div>
           <div className="timeline-labels">
-            <span className="mono-caption">Fase 1 — Base Atlética</span>
+            <span className="mono-caption">Fase 1 · Base Atlética</span>
             <span className="mono-caption">
-              Fase 2 — Potência e Desaceleração
+              Fase 2 · Potência e Desaceleração
             </span>
           </div>
         </div>

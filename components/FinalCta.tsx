@@ -13,7 +13,7 @@ export function FinalCta() {
           className="final-logo"
         />
         <p className="eyebrow">
-          <span className="min">90&apos;+</span> — Acréscimos
+          <span className="min">90&apos;+</span> · Acréscimos
         </p>
         <h2 className="display display-lg">
           A base não
@@ -28,8 +28,8 @@ export function FinalCta() {
         </p>
         <CtaButton
           ctaId="final"
-          label="Começar o treino 01 — R$ 59,90"
-          labelShort="Começar — R$ 59,90"
+          label="Começar o treino 01 · R$ 59,90"
+          labelShort="Começar · R$ 59,90"
         />
         <p className="cta-note">
           Acesso imediato · Garantia 7 dias · Pagamento único

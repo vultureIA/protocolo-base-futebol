@@ -5,7 +5,7 @@ export function PriceBlock() {
     <section className="section inverted field-corners" id="preco">
       <div className="wrap price-block" data-reveal>
         <p className="eyebrow">
-          <span className="min">83&apos;</span> — Investimento
+          <span className="min">83&apos;</span> · Investimento
         </p>
         <h2 className="display display-lg">
           Pagamento
@@ -23,8 +23,8 @@ export function PriceBlock() {
         <div className="price-cta">
           <CtaButton
             ctaId="preco"
-            label="Garantir acesso — R$ 59,90"
-            labelShort="Garantir — R$ 59,90"
+            label="Garantir acesso · R$ 59,90"
+            labelShort="Garantir · R$ 59,90"
           />
           <p className="cta-note">Garantia de 7 dias · reembolso de 100%</p>
         </div>

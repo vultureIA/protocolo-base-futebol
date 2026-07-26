@@ -35,11 +35,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.baseperformance.com.br"),
-  title: "Protocolo Base Futebol — 6 semanas | Base Performance",
+  title: "Protocolo Base Futebol de 6 semanas | Base Performance",
   description:
     "O protocolo de 6 semanas da recuperação do Berô Paraíba, hexacampeão do X1 Brazil. 3 treinos por semana, progressão pronta. R$ 59,90.",
   openGraph: {
-    title: "Protocolo Base Futebol — 6 semanas | Base Performance",
+    title: "Protocolo Base Futebol de 6 semanas | Base Performance",
     description:
       "Reconstrua sua base atlética em 6 semanas. O mesmo protocolo da recuperação do Berô Paraíba.",
     images: ["/images/og.jpg"],

@@ -3,7 +3,6 @@ import Image from "next/image";
 const CREDS = [
   "Graduado em Educação Física",
   "Especializações em Treinamento Funcional, Cross Training, Avaliação Física, Nutrição Esportiva e Performance Humana",
-  "Referências técnicas: Mike Boyle, Gray Cook, Tudor Bompa, EXOS, NSCA, FIFA 11+",
 ];
 
 export function Credibility() {
@@ -23,7 +22,7 @@ export function Credibility() {
           </figure>
           <div>
             <p className="eyebrow">
-              <span className="min">60&apos;</span> — Quem assina
+              <span className="min">60&apos;</span> · Quem assina
             </p>
             <h2 className="display display-md">
               Erivelton
@@ -43,9 +42,6 @@ export function Credibility() {
                 <li key={cred}>{cred}</li>
               ))}
             </ul>
-            <p className="coach-closing">
-              Método com literatura por trás. Não achismo de feed.
-            </p>
           </div>
         </div>
       </div>

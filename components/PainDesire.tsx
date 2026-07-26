@@ -11,7 +11,7 @@ export function PainDesire() {
       <section className="section bg-blackout cut-line field-sideline-left" id="dor">
         <div className="wrap" data-reveal>
           <p className="eyebrow">
-            <span className="min">27&apos;</span> — Você em campo
+            <span className="min">27&apos;</span> · Você em campo
           </p>
           <h2 className="display display-lg">
             O jogo cobra.
@@ -19,7 +19,7 @@ export function PainDesire() {
           </h2>
           <p className="lead">
             O primeiro sprint vem e a perna hesita. A dividida chega e você
-            recua. Quase nunca é falta de vontade. É falta de estrutura — e
+            recua. Quase nunca é falta de vontade. É falta de estrutura. E
             estrutura não se improvisa no domingo.
           </p>
           <ul className="symptom-list">
@@ -33,7 +33,7 @@ export function PainDesire() {
       <section className="section tick-divider floodlight-soft" id="desejo">
         <div className="wrap" data-reveal>
           <p className="eyebrow">
-            <span className="min">38&apos;</span> — O outro lado
+            <span className="min">38&apos;</span> · O outro lado
           </p>
           <h2 className="display display-lg">
             Entrar forte.
@@ -42,7 +42,7 @@ export function PainDesire() {
           </h2>
           <p className="lead">
             Acelerar sem calcular. Frear seco com o joelho firme. Disputar cada
-            bola sabendo que a estrutura aguenta. Isso não é dom — é treino na
+            bola sabendo que a estrutura aguenta. Isso não é dom. É treino na
             ordem certa.
           </p>
         </div>

@@ -7,7 +7,7 @@ const ITEMS = [
   {
     question: "É mais um treino genérico de internet?",
     answer:
-      "Não. São 6 semanas fechadas em duas fases, com séries, repetições e progressão definidas treino a treino — a mesma lógica que o Erivelton aplicou no case do Berô.",
+      "Não. São 6 semanas fechadas em duas fases, com séries, repetições e progressão definidas treino a treino. É a mesma lógica que o Erivelton aplicou no case do Berô.",
   },
   {
     question: "Estou voltando de lesão ou de um tempo parado. Posso fazer?",
@@ -17,12 +17,12 @@ const ITEMS = [
   {
     question: "Quanto tempo por semana?",
     answer:
-      "3 sessões por semana, ao longo de 6 semanas. Aquecimento e prevenção já estão dentro de cada sessão — você não precisa montar nada por fora.",
+      "3 sessões por semana, ao longo de 6 semanas. Aquecimento e prevenção já estão dentro de cada sessão. Você não precisa montar nada por fora.",
   },
   {
     question: "Funciona pra qualquer posição?",
     answer:
-      "As capacidades do protocolo — aceleração, frenagem, mudança de direção, força e estabilidade — são a base física de qualquer jogador de linha. O que muda entre posições é o jogo, não a base.",
+      "Aceleração, frenagem, mudança de direção, força e estabilidade são a base física de qualquer jogador de linha. É isso que o protocolo constrói. O que muda entre posições é o jogo, não a base.",
   },
   {
     question: "Nível mínimo de condicionamento?",
@@ -32,7 +32,7 @@ const ITEMS = [
   {
     question: "E se não for pra mim?",
     answer:
-      "Você tem 7 dias de garantia — dá pra treinar a primeira semana inteira. Não fez sentido, pede reembolso pela Eduzz e recebe 100%.",
+      "Você tem 7 dias de garantia, tempo de treinar a primeira semana inteira. Não fez sentido, pede reembolso pela Eduzz e recebe 100%.",
   },
 ];
 
@@ -42,7 +42,7 @@ export function Faq() {
       <div className="wrap">
         <div data-reveal>
           <p className="eyebrow">
-            <span className="min">88&apos;</span> — FAQ
+            <span className="min">88&apos;</span> · FAQ
           </p>
           <h2 className="display display-lg">
             Antes de

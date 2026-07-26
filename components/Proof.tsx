@@ -13,22 +13,22 @@ const GALLERY = [
   {
     src: "/images/hq/bero-antes.webp",
     alt: "Berô antes do protocolo",
-    caption: "Semana 0 — ponto de partida",
+    caption: "Semana 0 · ponto de partida",
   },
   {
     src: "/images/hq/bero-depois-frente.webp",
     alt: "Berô depois do protocolo, de frente",
-    caption: "Semana 6 — 74,5 kg",
+    caption: "Semana 6 · 74,5 kg",
   },
   {
     src: "/images/hq/bero-depois-perfil.webp",
     alt: "Berô depois do protocolo, de perfil",
-    caption: "Perfil — semana 6",
+    caption: "Perfil · semana 6",
   },
   {
     src: "/images/hq/bero-depois-costas.webp",
     alt: "Berô depois do protocolo, de costas",
-    caption: "Costas — semana 6",
+    caption: "Costas · semana 6",
   },
 ];
 
@@ -38,7 +38,7 @@ export function Proof() {
       <div className="wrap">
         <div data-reveal>
           <p className="eyebrow">
-            <span className="min">12&apos;</span> — O case · @beroparaiba
+            <span className="min">12&apos;</span> · O case · @beroparaiba
           </p>
           <h2 className="display display-lg">
             O placar
@@ -47,7 +47,7 @@ export function Proof() {
           </h2>
           <p className="lead">
             Retorno depois de um quadro pulmonar. Seis semanas de protocolo, três
-            treinos por semana. O resultado ficou no corpo — e está documentado.
+            treinos por semana. O resultado ficou no corpo. E está documentado.
           </p>
         </div>
 
@@ -65,7 +65,7 @@ export function Proof() {
 
         <p className="proof-disclaimer">
           Resultado individual do Berô, documentado no Instagram e usado com
-          autorização. A resposta ao treino varia de pessoa pra pessoa — o
+          autorização. A resposta ao treino varia de pessoa pra pessoa. O
           protocolo é o mesmo.
         </p>
 

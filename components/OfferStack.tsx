@@ -32,14 +32,14 @@ export function OfferStack() {
       <div className="wrap">
         <div data-reveal>
           <p className="eyebrow">
-            <span className="min">72&apos;</span> — O acesso
+            <span className="min">72&apos;</span> · O acesso
           </p>
           <h2 className="display display-lg">
             Tudo que
             <br />
             entra no acesso.
           </h2>
-          <p className="lead">O produto é o protocolo — inteiro, pronto pra executar.</p>
+          <p className="lead">O produto é o protocolo: inteiro, pronto pra executar.</p>
         </div>
 
         <div className="offer-card" data-reveal>

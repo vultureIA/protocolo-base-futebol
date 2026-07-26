@@ -14,7 +14,7 @@ export function Guarantee() {
           </div>
           <div>
             <p className="eyebrow">
-              <span className="min">85&apos;</span> — Risco zero
+              <span className="min">85&apos;</span> · Risco zero
             </p>
             <h2 className="display display-md">
               Treine a<br />
@@ -23,7 +23,7 @@ export function Guarantee() {
               Depois decida.
             </h2>
             <p className="lead">
-              A garantia cobre 7 dias — tempo de fazer a primeira semana
+              A garantia cobre 7 dias: tempo de fazer a primeira semana
               completa do protocolo, com as 3 sessões. Entra, treina, sente no
               corpo. Se não for pra você, pede o reembolso pela Eduzz e recebe
               100%. O risco é nosso.
