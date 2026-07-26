@@ -1471,6 +1471,199 @@ ul {
   }
 }
 
+/* ── 21b. ORBIT HERO (scroll-scrub 360°) ────────────────────── */
+
+/* Default (SSG, sem JS, reduced-motion, save-data): hero estático —
+   poster + eyebrow + display do beat 0 + micro/CTA do beat 3. */
+.orbit-hero {
+  position: relative;
+  background: var(--bg-pitch);
+  margin-top: -64px;
+}
+
+.orbit-sticky {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.orbit-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+.orbit-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 200ms var(--ease-out);
+}
+
+.orbit-canvas.is-ready {
+  opacity: 1;
+}
+
+.orbit-content {
+  position: relative;
+  z-index: var(--z-content);
+  width: min(100% - 2 * var(--gutter), var(--container));
+  margin-inline: auto;
+  padding-block: var(--sp-9) var(--sp-8);
+}
+
+.orbit-content::before {
+  /* shade inferior pra legibilidade do texto sobre o vídeo */
+  content: "";
+  position: absolute;
+  inset: -100vh -100vw 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    transparent 30%,
+    rgba(5, 7, 10, 0.55) 70%,
+    rgba(5, 7, 10, 0.9) 100%
+  );
+  pointer-events: none;
+}
+
+.orbit-eyebrow {
+  margin-bottom: var(--sp-5);
+}
+
+/* Estático: beats 1 e 2 escondidos; do beat 3 só micro + ações */
+.orbit-beat[data-beat="1"],
+.orbit-beat[data-beat="2"],
+.orbit-beat[data-beat="3"] .display {
+  display: none;
+}
+
+.orbit-micro {
+  margin-top: var(--sp-4);
+  color: var(--muted);
+}
+
+.orbit-cue {
+  display: none;
+}
+
+.orbit-loader {
+  display: none;
+}
+
+/* ── Modo scroll-driven (JS adiciona .orbit-active) ── */
+.orbit-active {
+  height: 400vh;
+}
+
+.orbit-active .orbit-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+}
+
+.orbit-active .orbit-beat {
+  display: block;
+  position: absolute;
+  bottom: calc(var(--sp-8) + 2.5rem);
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-3) var(--ease-out),
+    transform var(--dur-3) var(--ease-out);
+  pointer-events: none;
+}
+
+.orbit-active .orbit-beat .display {
+  display: block;
+}
+
+.orbit-active[data-stage="0"] .orbit-beat[data-beat="0"],
+.orbit-active[data-stage="1"] .orbit-beat[data-beat="1"],
+.orbit-active[data-stage="2"] .orbit-beat[data-beat="2"],
+.orbit-active[data-stage="3"] .orbit-beat[data-beat="3"] {
+  opacity: 1;
+  transform: none;
+}
+
+.orbit-active[data-stage="3"] .orbit-beat[data-beat="3"] {
+  pointer-events: auto;
+}
+
+.orbit-active .orbit-content {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  padding: var(--sp-9) var(--gutter) var(--sp-8);
+}
+
+.orbit-active .orbit-eyebrow {
+  position: absolute;
+  top: calc(64px + var(--sp-6));
+  left: var(--gutter);
+  right: var(--gutter);
+  margin: 0;
+}
+
+.orbit-active .orbit-cue {
+  display: block;
+  position: absolute;
+  bottom: var(--sp-5);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--lime);
+  opacity: 1;
+  transition: opacity var(--dur-3) var(--ease-out);
+}
+
+.orbit-active:not([data-stage="0"]) .orbit-cue {
+  opacity: 0;
+}
+
+.orbit-active .orbit-loader {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(238, 242, 233, 0.08);
+}
+
+.orbit-loader-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--lime);
+  transition: width var(--dur-2) linear, opacity var(--dur-4) var(--ease-out);
+}
+
+@media (max-width: 640px) {
+  .orbit-active {
+    height: 350vh;
+  }
+}
+
+@media (min-width: 641px) {
+  .orbit-active .orbit-beat,
+  .orbit-active .orbit-content {
+    max-width: none;
+  }
+
+  .orbit-active .orbit-beat {
+    left: var(--gutter);
+    right: auto;
+    max-width: 720px;
+  }
+}
+
 /* ── 22. REDUCED MOTION ─────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {

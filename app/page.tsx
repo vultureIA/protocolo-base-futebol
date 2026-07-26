@@ -2,7 +2,7 @@ import { Credibility } from "@/components/Credibility";
 import { Faq } from "@/components/Faq";
 import { FinalCta } from "@/components/FinalCta";
 import { Guarantee } from "@/components/Guarantee";
-import { Hero } from "@/components/Hero";
+import { OrbitHero } from "@/components/OrbitHero";
 import { Mechanism } from "@/components/Mechanism";
 import { MobileCtaBar } from "@/components/MobileCtaBar";
 import { OfferStack } from "@/components/OfferStack";
@@ -19,7 +19,7 @@ export default function Home() {
       <PageEffects />
       <SiteHeader />
       <main>
-        <Hero />
+        <OrbitHero />
         <Proof />
         <PainDesire />
         <Mechanism />
