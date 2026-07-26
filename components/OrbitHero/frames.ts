@@ -14,15 +14,15 @@ export type FrameSet = {
 export const FRAME_SETS: { d: FrameSet; m: FrameSet } = {
   d: {
     count: 120,
-    width: 1600,
-    height: 900,
+    width: 1920,
+    height: 1080,
     dir: "/orbit/d",
     poster: "/orbit/poster-d.webp",
   },
   m: {
     count: 80,
-    width: 720,
-    height: 1280,
+    width: 810,
+    height: 1440,
     dir: "/orbit/m",
     poster: "/orbit/poster-m.webp",
   },
