@@ -1,39 +1,78 @@
-import { CHECKOUT_URL } from "@/lib/constants";
+"use client";
+
+import {
+  CHECKOUT_URL,
+  PRICE_NUMBER,
+  PRODUCT_NAME,
+  type CtaId,
+} from "@/lib/constants";
 
 type CtaButtonProps = {
-  label?: string;
-  variant?: "primary" | "dark" | "light" | "ghost";
-  block?: boolean;
+  label: string;
+  /** Label curto exibido ≤400px (o completo não cabe em viewports estreitos). */
+  labelShort?: string;
+  ctaId: CtaId;
+  variant?: "primary" | "secondary";
   className?: string;
   href?: string;
 };
 
+/** Repassa utm_* e fbclid da LP para o checkout Eduzz. */
+function buildCheckoutUrl(base: string): string {
+  if (typeof window === "undefined") return base;
+  try {
+    const inParams = new URLSearchParams(window.location.search);
+    const url = new URL(base);
+    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"].forEach(
+      (key) => {
+        const value = inParams.get(key);
+        if (value) url.searchParams.set(key, value);
+      }
+    );
+    return url.toString();
+  } catch {
+    return base;
+  }
+}
+
 export function CtaButton({
-  label = "Quero reconstruir minha base",
+  label,
+  labelShort,
+  ctaId,
   variant = "primary",
-  block = false,
   className = "",
   href = CHECKOUT_URL,
 }: CtaButtonProps) {
-  const variantClass =
-    variant === "dark"
-      ? "btn-dark"
-      : variant === "light"
-        ? "btn-light"
-        : variant === "ghost"
-          ? "btn-ghost"
-          : "";
-
-  const isExternal = href.startsWith("http");
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    // href resolvido no clique — evita mismatch de hidratação com UTMs
+    event.currentTarget.href = buildCheckoutUrl(href);
+    const fbq = (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq;
+    if (typeof fbq === "function") {
+      fbq("track", "InitiateCheckout", {
+        content_name: PRODUCT_NAME,
+        value: PRICE_NUMBER,
+        currency: "BRL",
+        cta_id: ctaId,
+      });
+    }
+  };
 
   return (
     <a
       href={href}
-      className={`btn ${variantClass} ${block ? "btn-block" : ""} ${className}`.trim()}
-      target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noopener noreferrer" : undefined}
+      onClick={handleClick}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`btn btn-${variant} ${className}`.trim()}
     >
-      {label}
+      {labelShort ? (
+        <>
+          <span className="label-full">{label}</span>
+          <span className="label-short">{labelShort}</span>
+        </>
+      ) : (
+        label
+      )}
     </a>
   );
 }

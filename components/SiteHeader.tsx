@@ -15,7 +15,7 @@ export function SiteHeader() {
             className="brand-logo"
           />
         </a>
-        <CtaButton className="header-cta" label="Quero minha base" />
+        <CtaButton ctaId="header" label="Quero o protocolo" />
       </div>
     </header>
   );

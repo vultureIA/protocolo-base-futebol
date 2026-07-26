@@ -1,45 +1,46 @@
 import Image from "next/image";
 import { CtaButton } from "./CtaButton";
 
+/**
+ * Hero estático — variante provisória e fallback definitivo do OrbitHero
+ * (reduced-motion / sem JS / save-data). O poster será substituído pelo
+ * still âncora da órbita quando a produção (Fase 2) for aprovada.
+ */
 export function Hero() {
   return (
-    <section className="hero-cinematic" id="topo">
-      <div className="hero-cinematic-bg" aria-hidden="true">
-        <Image
-          src="/images/hq/bero-transformacao.webp"
-          alt=""
-          fill
-          priority
-          quality={92}
-          sizes="100vw"
-          className="hero-cinematic-img"
-        />
-        <div className="hero-cinematic-shade" />
-      </div>
-
-      <div className="wrap hero-cinematic-inner">
-        <div className="hero-copy rise">
-          <Image
-            src="/images/logo-base-horiz-branco-transparent.png"
-            alt="Base Performance"
-            width={1080}
-            height={484}
-            priority
-            className="hero-logo"
+    <section className="hero-static vignette" id="topo">
+      <Image
+        src="/images/hq/bero-depois-frente.webp"
+        alt="Berô Paraíba, hexacampeão do X1 Brazil"
+        fill
+        priority
+        quality={90}
+        sizes="100vw"
+        className="hero-static-img"
+      />
+      <div className="hero-static-shade" aria-hidden="true" />
+      <div className="hero-static-inner">
+        <p className="eyebrow">
+          <span className="min">0&apos;</span> — Berô Paraíba · Hexacampeão do X1
+          Brazil
+        </p>
+        <h1 className="display display-xl">
+          Reconstruído
+          <br />
+          em 6 semanas.
+        </h1>
+        <p className="lead">
+          O mesmo protocolo, aberto. 6 semanas. 3 treinos por semana.
+        </p>
+        <div className="hero-actions">
+          <CtaButton
+            ctaId="hero"
+            label="Começar minha base — R$ 59,90"
+            labelShort="Começar — R$ 59,90"
           />
-          <h1 className="display h1">
-            Toda grande performance começa pela base.
-          </h1>
-          <p className="lead hero-lead">
-            Protocolo de 6 semanas usado na recuperação do Berô Paraíba,
-            hexacampeão do X1 Brazil.
-          </p>
-          <div className="hero-actions rise-delay-1">
-            <CtaButton label="Quero reconstruir minha base" />
-            <a className="text-link" href="#prova">
-              Ver a transformação
-            </a>
-          </div>
+          <a className="text-link" href="#prova">
+            Ver a transformação do Berô ↓
+          </a>
         </div>
       </div>
     </section>

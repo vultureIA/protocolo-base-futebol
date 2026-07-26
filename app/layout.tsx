@@ -1,26 +1,26 @@
 import type { Metadata, Viewport } from "next";
-import { Anton_SC, Montserrat, Sora } from "next/font/google";
+import { Anton_SC, Chivo_Mono, Sora } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
 const anton = Anton_SC({
   weight: "400",
   subsets: ["latin"],
-  variable: "--font-anton",
+  variable: "--font-display-src",
   display: "swap",
 });
 
-const montserrat = Montserrat({
+const chivoMono = Chivo_Mono({
   subsets: ["latin"],
-  weight: ["600", "700", "800", "900"],
-  variable: "--font-montserrat",
+  weight: ["400", "700"],
+  variable: "--font-mono-src",
   display: "swap",
 });
 
 const sora = Sora({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-sora",
+  weight: ["400", "600", "700"],
+  variable: "--font-body-src",
   display: "swap",
 });
 
@@ -30,19 +30,22 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#070d1f",
+  themeColor: "#05070A",
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://landing-sepia-phi-67.vercel.app"),
-  title: "Protocolo Base Futebol | Base Performance",
+  title: "Protocolo Base Futebol — 6 semanas | Base Performance",
   description:
-    "Em 6 semanas, reconstrua a base atlética do futebol com o protocolo usado na recuperação do Berô Paraíba. Método EF Performance.",
+    "O protocolo de 6 semanas da recuperação do Berô Paraíba, hexacampeão do X1 Brazil. 3 treinos por semana, progressão pronta. R$ 59,90.",
   openGraph: {
-    title: "Protocolo Base Futebol | Base Performance",
+    title: "Protocolo Base Futebol — 6 semanas | Base Performance",
     description:
       "Reconstrua sua base atlética em 6 semanas. O mesmo protocolo da recuperação do Berô Paraíba.",
     images: ["/images/hq/bero-transformacao.webp"],
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 
@@ -54,7 +57,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${anton.variable} ${montserrat.variable} ${sora.variable}`}
+      className={`${anton.variable} ${chivoMono.variable} ${sora.variable}`}
     >
       <body>
         <Script id="meta-pixel" strategy="afterInteractive">
@@ -69,6 +72,13 @@ export default function RootLayout({
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '${META_PIXEL_ID}');
             fbq('track', 'PageView');
+            fbq('track', 'ViewContent', {
+              content_name: 'protocolo-base-futebol',
+              content_type: 'product',
+              content_ids: ['protocolo-base-futebol'],
+              value: 59.90,
+              currency: 'BRL'
+            });
           `}
         </Script>
         <noscript>

@@ -1,22 +1,33 @@
-import { PRICE } from "@/lib/constants";
 import { CtaButton } from "./CtaButton";
 
 export function PriceBlock() {
   return (
-    <section className="section section-surface" id="preco">
-      <div className="wrap price-wrap reveal">
-        <p className="eyebrow">Investimento</p>
-        <h2 className="display h2">Protocolo completo. Pagamento único.</h2>
+    <section className="section inverted field-corners" id="preco">
+      <div className="wrap price-block" data-reveal>
+        <p className="eyebrow">
+          <span className="min">83&apos;</span> — Investimento
+        </p>
+        <h2 className="display display-lg">
+          Pagamento
+          <br />
+          único.
+        </h2>
         <p className="lead">
-          Acesso imediato às 6 semanas, com progressão pronta pra aplicar no
-          treino.
+          18 treinos planejados em 6 semanas. Sem mensalidade. Acesso imediato.
         </p>
-        <p className="now">
-          <small>R$</small>
-          {PRICE}
+        <p className="price-caption">6 semanas · 18 sessões · pagamento único</p>
+        <p className="price-now">
+          <small>R$</small> 59,90
         </p>
-        <p className="cta-note">Sem mensalidade · Garantia de 7 dias</p>
-        <CtaButton label={`Quero o protocolo por R$ ${PRICE}`} />
+        <p className="price-per">= R$ 3,33 por sessão</p>
+        <div className="price-cta">
+          <CtaButton
+            ctaId="preco"
+            label="Garantir acesso — R$ 59,90"
+            labelShort="Garantir — R$ 59,90"
+          />
+          <p className="cta-note">Garantia de 7 dias · reembolso de 100%</p>
+        </div>
       </div>
     </section>
   );
