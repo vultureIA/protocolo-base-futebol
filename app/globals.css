@@ -1573,8 +1573,8 @@ ul {
   display: block;
   position: absolute;
   bottom: calc(var(--sp-8) + 2.5rem);
-  left: 0;
-  right: 0;
+  left: var(--gutter);
+  right: var(--gutter);
   opacity: 0;
   transform: translateY(24px);
   transition: opacity var(--dur-3) var(--ease-out),
