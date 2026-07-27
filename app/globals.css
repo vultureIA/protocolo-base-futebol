@@ -1576,10 +1576,30 @@ ul {
   left: var(--gutter);
   right: var(--gutter);
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(40px);
   transition: opacity var(--dur-3) var(--ease-out),
     transform var(--dur-3) var(--ease-out);
   pointer-events: none;
+}
+
+/* Tick de limão que risca quando o beat chega — sinaliza "texto novo" */
+.orbit-active .orbit-beat::before {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: var(--lime);
+  margin-bottom: var(--sp-4);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-3) var(--ease-out) 120ms;
+}
+
+.orbit-active[data-stage="0"] .orbit-beat[data-beat="0"]::before,
+.orbit-active[data-stage="1"] .orbit-beat[data-beat="1"]::before,
+.orbit-active[data-stage="2"] .orbit-beat[data-beat="2"]::before,
+.orbit-active[data-stage="3"] .orbit-beat[data-beat="3"]::before {
+  transform: scaleX(1);
 }
 
 .orbit-active .orbit-beat .display {
@@ -1626,6 +1646,21 @@ ul {
 
 .orbit-active:not([data-stage="0"]) .orbit-cue {
   opacity: 0;
+}
+
+/* Cortina de encerramento — fade pra preto dirigido pelo scroll (96–100%) */
+.orbit-endfade {
+  display: none;
+}
+
+.orbit-active .orbit-endfade {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: var(--bg-pitch);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .orbit-active .orbit-loader {

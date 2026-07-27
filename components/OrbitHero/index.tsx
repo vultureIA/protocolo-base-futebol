@@ -29,6 +29,7 @@ export function OrbitHero() {
   const stickyRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
+  const fadeRef = useRef<HTMLDivElement>(null);
   const [frameSet, setFrameSet] = useState<FrameSet | null>(null);
   const [canvasReady, setCanvasReady] = useState(false);
   const progressRef = useRef({ raw: 0, smooth: 0, frame: -1, stage: -1 });
@@ -132,11 +133,24 @@ export function OrbitHero() {
         drawCurrent();
       }
 
-      // beats do storyboard (4 estágios: 0/25/50/75%)
-      const stage = p.raw >= 0.75 ? 3 : p.raw >= 0.5 ? 2 : p.raw >= 0.25 ? 1 : 0;
+      // beats do storyboard com LACUNAS entre eles — o texto some, o atleta
+      // gira sozinho, e o beat seguinte "chega" (ausência → chegada é o que
+      // torna a troca perceptível)
+      const r = p.raw;
+      const stage =
+        r < 0.2 ? 0 : r < 0.27 ? -1 : r < 0.45 ? 1 : r < 0.52 ? -1 : r < 0.7 ? 2 : r < 0.77 ? -1 : 3;
       if (stage !== p.stage) {
         p.stage = stage;
-        sectionRef.current?.setAttribute("data-stage", String(stage));
+        sectionRef.current?.setAttribute(
+          "data-stage",
+          stage === -1 ? "gap" : String(stage)
+        );
+      }
+
+      // fade pra preto no encerramento (96% → 100%) — cortina antes da Prova
+      if (fadeRef.current) {
+        const fade = Math.min(Math.max((r - 0.96) / 0.04, 0), 1);
+        fadeRef.current.style.opacity = String(fade);
       }
 
       // tracking de engajamento (disparo único)
@@ -215,6 +229,9 @@ export function OrbitHero() {
           className={`orbit-canvas${canvasReady ? " is-ready" : ""}`}
           aria-hidden="true"
         />
+
+        {/* Cortina de encerramento (96–100% do scroll) */}
+        <div ref={fadeRef} className="orbit-endfade" aria-hidden="true" />
 
         {/* Barra de carregamento — placar */}
         <div className="orbit-loader" aria-hidden="true">
