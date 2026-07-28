@@ -22,8 +22,8 @@ export function OrbitHero() {
           </h1>
 
           <p className="micro orbit-micro">
-            Treino pronto, 3 vezes por semana. Sem montar nada, sem adivinhar —
-            é abrir e executar. Garantia de 7 dias.
+            Treino pronto, 3 vezes por semana. Sem montar nada, sem adivinhar.
+            É abrir e executar. Garantia de 7 dias.
           </p>
 
           <div className="hero-actions">
