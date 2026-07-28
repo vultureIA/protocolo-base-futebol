@@ -32,7 +32,7 @@ export function OrbitHero() {
   const fadeRef = useRef<HTMLDivElement>(null);
   const [frameSet, setFrameSet] = useState<FrameSet | null>(null);
   const [canvasReady, setCanvasReady] = useState(false);
-  const progressRef = useRef({ raw: 0, smooth: 0, frame: -1, stage: -1 });
+  const progressRef = useRef({ raw: 0, smooth: 0, frame: -1, stage: -1, dir: 1 });
   const firedRef = useRef({ start: false, half: false, complete: false });
 
   const { getNearestFrame, warmDecode } = useFrameLoader(
@@ -86,14 +86,22 @@ export function OrbitHero() {
     let rafId = 0;
     let scheduled = false;
     let running = true;
+    let lastTs = 0;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
     const resize = () => {
       const sticky = stickyRef.current;
       if (!sticky) return;
-      canvas.width = Math.round(sticky.clientWidth * dpr);
-      canvas.height = Math.round(sticky.clientHeight * dpr);
+      // Canvas nunca maior que o frame de origem: acima disso o blit só
+      // encarece (a CSS estica o canvas na GPU sem perda visível)
+      const cap = Math.min(
+        frameSet.width / Math.max(sticky.clientWidth, 1),
+        frameSet.height / Math.max(sticky.clientHeight, 1)
+      );
+      const scale = Math.min(dpr, cap);
+      canvas.width = Math.round(sticky.clientWidth * scale);
+      canvas.height = Math.round(sticky.clientHeight * scale);
       progressRef.current.frame = -1; // força redraw
       drawCurrent();
     };
@@ -116,15 +124,20 @@ export function OrbitHero() {
       if (img) {
         drawCover(img);
         if (!canvasReady) setCanvasReady(true);
-        warmDecode(target);
+        warmDecode(target, p.dir);
       }
     };
 
-    const tick = () => {
+    const tick = (ts: number) => {
       scheduled = false;
       if (!running) return;
+      const dt = lastTs ? Math.min(ts - lastTs, 64) : 16.7;
+      lastTs = ts;
       const p = progressRef.current;
-      p.smooth += (p.raw - p.smooth) * 0.18;
+      // Suavização independente de frame-rate (τ = 90 ms): mesma resposta em
+      // 60 e 120 Hz, segue o dedo sem efeito elástico
+      const alpha = 1 - Math.exp(-dt / 90);
+      p.smooth += (p.raw - p.smooth) * alpha;
       if (Math.abs(p.raw - p.smooth) < 0.0005) p.smooth = p.raw;
 
       const frame = Math.round(p.smooth * (frameSet.count - 1));
@@ -178,7 +191,9 @@ export function OrbitHero() {
       const rect = section.getBoundingClientRect();
       const trackLength = section.offsetHeight - window.innerHeight;
       const p = progressRef.current;
-      p.raw = Math.min(Math.max(-rect.top / Math.max(trackLength, 1), 0), 1);
+      const raw = Math.min(Math.max(-rect.top / Math.max(trackLength, 1), 0), 1);
+      if (raw !== p.raw) p.dir = raw > p.raw ? 1 : -1;
+      p.raw = raw;
       if (!scheduled) {
         scheduled = true;
         rafId = requestAnimationFrame(tick);

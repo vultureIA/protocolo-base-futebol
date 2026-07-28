@@ -42,7 +42,7 @@ export function useFrameLoader(
 
     let cursor = 0;
     let active = 0;
-    const CONCURRENCY = 6;
+    const CONCURRENCY = 8;
 
     const pump = () => {
       if (abortRef.current) return;
@@ -89,10 +89,16 @@ export function useFrameLoader(
     return images.get(0) ?? null;
   };
 
-  /** Aquecimento de decode ao redor do frame atual. */
-  const warmDecode = (center: number) => {
+  /**
+   * Aquecimento de decode ao redor do frame atual, com viés na direção do
+   * movimento. Passo 1 obrigatório: qualquer frame pulado vira decode
+   * síncrono no drawImage (hitch de 8–16 ms no meio do scroll).
+   */
+  const warmDecode = (center: number, direction = 1) => {
     const images = imagesRef.current;
-    for (let d = -12; d <= 12; d += 4) {
+    const ahead = direction >= 0 ? 10 : 4;
+    const behind = direction >= 0 ? 4 : 10;
+    for (let d = -behind; d <= ahead; d++) {
       const img = images.get(center + d);
       if (img && img.decode) img.decode().catch(() => {});
     }
