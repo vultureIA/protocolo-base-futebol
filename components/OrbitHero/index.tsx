@@ -35,7 +35,7 @@ export function OrbitHero() {
   const progressRef = useRef({ raw: 0, smooth: 0, frame: -1, stage: -1, dir: 1 });
   const firedRef = useRef({ start: false, half: false, complete: false });
 
-  const { getNearestFrame, warmDecode } = useFrameLoader(
+  const { getFrame, warm } = useFrameLoader(
     frameSet,
     (loadedCount, total) => {
       if (barRef.current) {
@@ -106,25 +106,27 @@ export function OrbitHero() {
       drawCurrent();
     };
 
-    const drawCover = (img: HTMLImageElement) => {
+    const drawCover = (img: HTMLImageElement | ImageBitmap) => {
       const cw = canvas.width;
       const ch = canvas.height;
+      const iw = img instanceof HTMLImageElement ? img.naturalWidth : img.width;
+      const ih = img instanceof HTMLImageElement ? img.naturalHeight : img.height;
       ctx.fillStyle = "#05070A";
       ctx.fillRect(0, 0, cw, ch);
-      const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
-      const dw = img.naturalWidth * scale;
-      const dh = img.naturalHeight * scale;
+      const scale = Math.max(cw / iw, ch / ih);
+      const dw = iw * scale;
+      const dh = ih * scale;
       ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
     };
 
     const drawCurrent = () => {
       const p = progressRef.current;
       const target = Math.round(p.smooth * (frameSet.count - 1));
-      const img = getNearestFrame(target);
+      const img = getFrame(target);
       if (img) {
         drawCover(img);
         if (!canvasReady) setCanvasReady(true);
-        warmDecode(target, p.dir);
+        warm(target, p.dir);
       }
     };
 

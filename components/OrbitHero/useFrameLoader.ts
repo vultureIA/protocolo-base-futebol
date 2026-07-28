@@ -3,19 +3,31 @@ import { framePath, type FrameSet } from "./frames";
 
 /**
  * Carrega os frames em camadas de stride (8 → 4 → 2 → 1) com concorrência
- * limitada. Enquanto o set não está completo, getNearestFrame devolve o
- * frame carregado mais próximo do índice alvo — a órbita degrada para
- * "mais grossa", nunca trava.
+ * limitada. Enquanto o set não está completo, getFrame devolve o frame
+ * carregado mais próximo do índice alvo — a órbita degrada para "mais
+ * grossa", nunca trava.
  *
- * Mantém apenas HTMLImageElements (bytes comprimidos); o decode fica por
- * conta do cache do browser, aquecido numa janela de ±12 frames.
+ * Duas camadas de cache:
+ * - HTMLImageElements (bytes comprimidos) do set inteiro;
+ * - janela deslizante de ImageBitmaps (pixels decodificados, prontos pra
+ *   blit) ao redor do frame atual. Decode garantido fora do main thread,
+ *   sem depender do cache de decode do browser — que evicta sob pressão
+ *   de memória e devolve o hitch no meio do scroll.
  */
+
+const AHEAD = 10; // bitmaps à frente do movimento
+const BEHIND = 4; // bitmaps atrás
+const EVICT_RADIUS = 20; // fora disso, close() libera a memória
+
 export function useFrameLoader(
   set: FrameSet | null,
   onProgress?: (loaded: number, total: number) => void
 ) {
   const imagesRef = useRef<Map<number, HTMLImageElement>>(new Map());
   const loadedRef = useRef<Set<number>>(new Set());
+  const bitmapsRef = useRef<Map<number, ImageBitmap>>(new Map());
+  const pendingRef = useRef<Set<number>>(new Set());
+  const centerRef = useRef(0);
   const abortRef = useRef(false);
 
   useEffect(() => {
@@ -23,8 +35,12 @@ export function useFrameLoader(
     abortRef.current = false;
     const images = imagesRef.current;
     const loaded = loadedRef.current;
+    const bitmaps = bitmapsRef.current;
     images.clear();
     loaded.clear();
+    bitmaps.forEach((bmp) => bmp.close());
+    bitmaps.clear();
+    pendingRef.current.clear();
 
     const tiers = [8, 4, 2, 1];
     const queue: number[] = [];
@@ -71,38 +87,75 @@ export function useFrameLoader(
 
     return () => {
       abortRef.current = true;
+      bitmaps.forEach((bmp) => bmp.close());
+      bitmaps.clear();
+      pendingRef.current.clear();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [set]);
 
-  const getNearestFrame = (target: number): HTMLImageElement | null => {
+  /** Melhor fonte pro índice alvo: bitmap decodificado > imagem > vizinho. */
+  const getFrame = (target: number): ImageBitmap | HTMLImageElement | null => {
+    const bmp = bitmapsRef.current.get(target);
+    if (bmp) return bmp;
     const images = imagesRef.current;
     const exact = images.get(target);
     if (exact) return exact;
     // procura o carregado mais próximo (janela crescente)
     for (let delta = 1; delta < 64; delta++) {
       const below = images.get(target - delta);
-      if (below) return below;
+      if (below) return bitmapsRef.current.get(target - delta) ?? below;
       const above = images.get(target + delta);
-      if (above) return above;
+      if (above) return bitmapsRef.current.get(target + delta) ?? above;
     }
     return images.get(0) ?? null;
   };
 
   /**
-   * Aquecimento de decode ao redor do frame atual, com viés na direção do
-   * movimento. Passo 1 obrigatório: qualquer frame pulado vira decode
-   * síncrono no drawImage (hitch de 8–16 ms no meio do scroll).
+   * Mantém a janela de bitmaps ao redor do frame atual com viés na direção
+   * do movimento; evicta os que ficaram longe. Passo 1 obrigatório:
+   * qualquer frame pulado viraria decode síncrono no drawImage.
    */
-  const warmDecode = (center: number, direction = 1) => {
+  const warm = (center: number, direction = 1) => {
+    centerRef.current = center;
     const images = imagesRef.current;
-    const ahead = direction >= 0 ? 10 : 4;
-    const behind = direction >= 0 ? 4 : 10;
-    for (let d = -behind; d <= ahead; d++) {
-      const img = images.get(center + d);
-      if (img && img.decode) img.decode().catch(() => {});
+
+    if (typeof createImageBitmap !== "function") {
+      // browser antigo: aquece o cache de decode e segue o jogo
+      for (let d = -BEHIND; d <= AHEAD; d++) {
+        const img = images.get(center + (direction >= 0 ? d : -d));
+        if (img && img.decode) img.decode().catch(() => {});
+      }
+      return;
     }
+
+    const bitmaps = bitmapsRef.current;
+    const pending = pendingRef.current;
+    const lo = center - (direction >= 0 ? BEHIND : AHEAD);
+    const hi = center + (direction >= 0 ? AHEAD : BEHIND);
+    for (let i = lo; i <= hi; i++) {
+      if (i < 0 || bitmaps.has(i) || pending.has(i)) continue;
+      const img = images.get(i);
+      if (!img) continue;
+      pending.add(i);
+      createImageBitmap(img)
+        .then((bmp) => {
+          pending.delete(i);
+          if (abortRef.current || Math.abs(i - centerRef.current) > EVICT_RADIUS) {
+            bmp.close();
+            return;
+          }
+          bitmaps.set(i, bmp);
+        })
+        .catch(() => pending.delete(i));
+    }
+    bitmaps.forEach((bmp, i) => {
+      if (Math.abs(i - center) > EVICT_RADIUS) {
+        bitmaps.delete(i);
+        bmp.close();
+      }
+    });
   };
 
-  return { getNearestFrame, warmDecode, loadedRef };
+  return { getFrame, warm, loadedRef };
 }
