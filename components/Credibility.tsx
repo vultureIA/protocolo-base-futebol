@@ -12,7 +12,7 @@ export function Credibility() {
         <div className="coach" data-reveal>
           <figure className="coach-photo field-arc">
             <Image
-              src="/images/hq/erivelton.jpg"
+              src="/b/images/hq/erivelton.jpg"
               alt="Erivelton Fernandes, preparador físico"
               width={900}
               height={1200}

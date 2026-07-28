@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect } from "react";
+import { AB_VARIANT } from "@/lib/constants";
 
 function track(event: string, params?: Record<string, unknown>, custom = true) {
   const fbq = (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq;
   if (typeof fbq !== "function") return;
-  fbq(custom ? "trackCustom" : "track", event, params ?? {});
+  fbq(custom ? "trackCustom" : "track", event, { ab_variant: AB_VARIANT, ...params });
 }
 
 /**

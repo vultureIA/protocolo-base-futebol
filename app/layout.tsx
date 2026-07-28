@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     title: "Protocolo Base Futebol de 6 semanas | Base Performance",
     description:
       "Reconstrua sua base atlética em 6 semanas. O mesmo protocolo da recuperação do Berô Paraíba.",
-    images: ["/images/og.jpg"],
+    images: ["/b/images/og.jpg"],
   },
   twitter: {
     card: "summary_large_image",
@@ -77,7 +77,8 @@ export default function RootLayout({
               content_type: 'product',
               content_ids: ['protocolo-base-futebol'],
               value: 59.90,
-              currency: 'BRL'
+              currency: 'BRL',
+              ab_variant: 'b'
             });
           `}
         </Script>

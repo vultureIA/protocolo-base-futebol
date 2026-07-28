@@ -8,7 +8,7 @@ export function MobileCtaBar() {
         <strong>R$ {PRICE}</strong>
         <span>Garantia 7 dias</span>
       </div>
-      <CtaButton ctaId="mobile_bar" label="Começar" />
+      <CtaButton ctaId="mobile_bar" label="Começar agora" labelShort="Começar" />
     </div>
   );
 }

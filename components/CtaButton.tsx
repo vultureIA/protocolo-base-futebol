@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  AB_VARIANT,
   CHECKOUT_URL,
   PRICE_NUMBER,
   PRODUCT_NAME,
@@ -53,6 +54,7 @@ export function CtaButton({
         value: PRICE_NUMBER,
         currency: "BRL",
         cta_id: ctaId,
+        ab_variant: AB_VARIANT,
       });
     }
   };

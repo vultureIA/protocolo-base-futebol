@@ -11,22 +11,22 @@ const STATS = [
 
 const GALLERY = [
   {
-    src: "/images/hq/bero-antes.webp",
+    src: "/b/images/hq/bero-antes.webp",
     alt: "Berô antes do protocolo",
     caption: "Semana 0 · ponto de partida",
   },
   {
-    src: "/images/hq/bero-depois-frente.webp",
+    src: "/b/images/hq/bero-depois-frente.webp",
     alt: "Berô depois do protocolo, de frente",
     caption: "Semana 6 · 74,5 kg",
   },
   {
-    src: "/images/hq/bero-depois-perfil.webp",
+    src: "/b/images/hq/bero-depois-perfil.webp",
     alt: "Berô depois do protocolo, de perfil",
     caption: "Perfil · semana 6",
   },
   {
-    src: "/images/hq/bero-depois-costas.webp",
+    src: "/b/images/hq/bero-depois-costas.webp",
     alt: "Berô depois do protocolo, de costas",
     caption: "Costas · semana 6",
   },
@@ -71,7 +71,7 @@ export function Proof() {
 
         <div className="proof-feature" data-reveal>
           <Image
-            src="/images/hq/bero-antes-depois.webp"
+            src="/b/images/hq/bero-antes-depois.webp"
             alt="Antes e depois do Berô Paraíba em 6 semanas de protocolo"
             width={2000}
             height={2000}

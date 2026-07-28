@@ -6,6 +6,9 @@ export const PRICE_NUMBER = 59.9;
 export const GUARANTEE_DAYS = 7;
 export const PRODUCT_NAME = "protocolo-base-futebol";
 
+/** Variante do teste A/B — enviada como parâmetro custom nos eventos do Pixel. */
+export const AB_VARIANT = "b";
+
 /** Identifica a posição do CTA nos eventos InitiateCheckout do Pixel. */
 export type CtaId =
   | "header"

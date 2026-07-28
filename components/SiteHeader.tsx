@@ -7,7 +7,7 @@ export function SiteHeader() {
       <div className="wrap">
         <a className="brand" href="#topo" aria-label="Base Performance">
           <Image
-            src="/images/logo-base-horiz-branco-transparent.png"
+            src="/b/images/logo-base-horiz-branco-transparent.png"
             alt="Base Performance"
             width={1080}
             height={484}

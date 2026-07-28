@@ -6,7 +6,7 @@ export function FinalCta() {
     <section className="section inverted field-circle-big final-cta">
       <div className="wrap" data-reveal>
         <Image
-          src="/images/logo-base-horiz-branco-transparent.png"
+          src="/b/images/logo-base-horiz-branco-transparent.png"
           alt="Base Performance"
           width={1080}
           height={484}
@@ -16,19 +16,19 @@ export function FinalCta() {
           <span className="min">90&apos;+</span> · Acréscimos
         </p>
         <h2 className="display display-lg">
-          A base não
+          Treino pronto.
           <br />
-          se improvisa.
+          Resultado rápido.
           <br />
-          Se constrói.
+          Decisão sua.
         </h2>
         <p className="lead">
-          6 semanas. 18 treinos. Progressão pronta. O mesmo protocolo do case do
-          Berô.
+          6 semanas. 18 treinos prontos. Zero adivinhação. O mesmo protocolo que
+          reconstruiu o Berô.
         </p>
         <CtaButton
           ctaId="final"
-          label="Começar o treino 01 · R$ 59,90"
+          label="Quero resultado rápido · R$ 59,90"
           labelShort="Começar · R$ 59,90"
         />
         <p className="cta-note">
